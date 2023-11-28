@@ -1,15 +1,3 @@
-# ベクトルの定義と計算をするモジュール
-# class Vector3:
-    # 三次元ベクトルの構造体
-# Add3(),Sub3(),Multi3(),Div():
-    # 三次元ベクトルの四則演算(Multiはスカラー倍)
-# Dot3(),Cross3():
-    # 内積、外積の計算
-# sin(),cos():
-    # 角度を引数として受け取り、三角関数の値を返す(10度単位)
-# RX(),RY(),RZ():
-    # 引数の頂点をワールド軸で回転させて返す
-
 # 三次元ベクトルクラス
 class Vector3:
     def __init__(self,x,y,z):
@@ -52,53 +40,36 @@ def Cross3(a,b):
     )
     return ans
 
+# sin表
+sinlist = [0,
+           0.01, 0.03, 0.05, 0.06, 0.08,
+           0.1, 0.12, 0.13, 0.15, 0.17,
+           0.19, 0.20, 0.22, 0.24, 0.25,
+           0.27, 0.29, 0.3, 0.32, 0.34,
+           0.35, 0.37, 0.39, 0.4, 0.42,
+           0.43, 0.45, 0.46, 0.48, 0.5,
+           0.51, 0.52, 0.54, 0.55, 0.57,
+           0.58, 0.6, 0.61, 0.62, 0.64,
+           0.65, 0.66, 0.68, 0.69, 0.7,
+           0.71, 0.73, 0.74, 0.75, 0.76,
+           0.77, 0.78, 0.79, 0.8, 0.81,
+           0.82, 0.83, 0.84, 0.85, 0.86,
+           0.87, 0.88, 0.89, 0.89, 0.90,
+           0.91, 0.92, 0.92, 0.93, 0.93,
+           0.94, 0.95, 0.95, 0.96, 0.96,
+           0.97, 0.97, 0.97, 0.98, 0.98,
+           0.98, 0.99, 0.99, 0.99, 0.99,
+           0.99, 0.99, 0.99, 0.99, 1]
+
 # sinの値を返す関数
 def sin(Angle):
-    A = round(Angle,-1)
-    if A == 0:
-        return 0
-    elif A == 10:
-        return 0.17
-    elif A == 20:
-        return 0.34
-    elif A == 30:
-        return 0.5
-    elif A == 40:
-        return 0.64
-    elif A == 50:
-        return 0.76
-    elif A == 60:
-        return 0.86
-    elif A == 70:
-        return 0.93
-    elif A == 80:
-        return 0.98
-    elif A == 90:
-        return 1
+    global sinlist
+    return sinlist[Angle]
 
 # cosの値を返す関数
 def cos(Angle):
-    A = round(Angle,-1)
-    if A == 0:
-        return 1
-    elif A == 10:
-        return 0.98
-    elif A == 20:
-        return 0.93
-    elif A == 30:
-        return 0.86
-    elif A == 40:
-        return 0.76
-    elif A == 50:
-        return 0.64
-    elif A == 60:
-        return 0.5
-    elif A == 70:
-        return 0.34
-    elif A == 80:
-        return 0.17
-    elif A == 90:
-        return 0
+    global sinlist
+    return sinlist[90-Angle]
 
 # Xの回転行列を計算
 def RX(Pos,Angle):
