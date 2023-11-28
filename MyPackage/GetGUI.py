@@ -1,8 +1,3 @@
-# 入力ボックスの値取得モジュール
-# def GetOption(すべての入力ボックス):
-    # データを受け取って戻り値で渡す
-    # intやfloatに変換できないもの、使用できない範囲の数値はエラーで返す
-
 def GetOption(ILL_Entry,WS_Entry,CPX_Entry,CPY_Entry,CPZ_Entry,FL_Entry,RX_Entry,RY_Entry,RZ_Entry,CRX_Entry,CRY_Entry,CRZ_Entry):
     # 各入力ボックスのデータを受け取る
     ILL = int(ILL_Entry.get())

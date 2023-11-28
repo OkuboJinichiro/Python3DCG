@@ -1,5 +1,3 @@
-# パッケージインポート用ファイル
-
 from .Math import Vector3,Dot3,Cross3,Sub3
 from .Window import WindowMaker,GUIMaker,StartWindow
 from .Render import Rendering
