@@ -71,8 +71,40 @@ def cos(Angle):
     global sinlist
     return sinlist[90-Angle]
 
+# 回転量を90度以下に分割
+def Angle90(Angle):
+    Angle2,Angle3,Angle4 = 0,0,0
+    # Angleをプラスにする
+    while 1:
+        if Angle < 0:
+            Angle = Angle + 360
+        else:break
+    # Angleが0だったら何もしない
+    if Angle == 0:
+        return Angle,Angle2,Angle3,Angle4
+    # Angleを分割
+    if Angle / 90 > 1:
+        A = Angle%360
+        if A <= 90:
+            Angle = A
+        elif A <= 180:
+            Angle = 90
+            Angle2 = A-90
+        elif A <= 270:
+            Angle = 90
+            Angle2 = 90
+            Angle3 = A-180
+        elif A <= 360:
+            Angle = 90
+            Angle2 = 90
+            Angle3 = 90
+            Angle4 = A-270
+    return Angle,Angle2,Angle3,Angle4
+
 # Xの回転行列を計算
 def RX(Pos,Angle):
+    if Angle == 0:
+        return Pos
     NewPos = Vector3(Pos.x,
                      Pos.y*cos(Angle) + Pos.z*-1*sin(Angle),
                      Pos.y*sin(Angle) + Pos.z*cos(Angle))
@@ -80,6 +112,8 @@ def RX(Pos,Angle):
 
 # Yの回転行列を計算
 def RY(Pos,Angle):
+    if Angle == 0:
+        return Pos
     NewPos = Vector3(Pos.x*cos(Angle) + Pos.z*sin(Angle),
                      Pos.y,
                      Pos.x*-1*sin(Angle) + Pos.z*cos(Angle))
@@ -87,6 +121,8 @@ def RY(Pos,Angle):
 
 # Zの回転行列を計算
 def RZ(Pos,Angle):
+    if Angle == 0:
+        return Pos
     NewPos = Vector3(Pos.x*cos(Angle) + Pos.y*-1*sin(Angle),
                      Pos.x*sin(Angle) + Pos.y*cos(Angle),
                      Pos.z)

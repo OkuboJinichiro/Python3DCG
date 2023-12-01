@@ -12,83 +12,35 @@ class Camera:
     def RotateALL(self,RayVector):
         # X回転
         Angle = self.Rotate.x
-        while 1:
-            if Angle < 0:
-                Angle = Angle + 360
-            else:break
-        Angle2,Angle3,Angle4 = 0,0,0
-        if Angle / 90 > 1:
-            A = Angle%360
-            if A <= 90:
-                Angle = A
-            elif A <= 180:
-                Angle = 90
-                Angle2 = A-90
-            elif A <= 270:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = A-180
-            elif A <= 360:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = 90
-                Angle4 = A-270
+        # 角度を90度以下に分割
+        Angle,Angle2,Angle3,Angle4 = Angle90(Angle)
         Angles = [Angle,Angle2,Angle3,Angle4]
         for i in Angles:
+            if i == 0:
+                continue
+            # 角度が0じゃなかったら各頂点を回転
             RayVector = RX(RayVector,i)
 
         # Y回転
         Angle = self.Rotate.y
-        while 1:
-            if Angle < 0:
-                Angle = Angle + 360
-            else:break
-        Angle2,Angle3,Angle4 = 0,0,0
-        if Angle / 90 > 1:
-            A = Angle%360
-            if A <= 90:
-                Angle = A
-            elif A <= 180:
-                Angle = 90
-                Angle2 = A-90
-            elif A <= 270:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = A-180
-            elif A <= 360:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = 90
-                Angle4 = A-270
+        # 角度を90度以下に分割
+        Angle,Angle2,Angle3,Angle4 = Angle90(Angle)
         Angles = [Angle,Angle2,Angle3,Angle4]
         for i in Angles:
+            if i == 0:
+                continue
+            # 角度が0じゃなかったら各頂点を回転
             RayVector = RY(RayVector,i)
 
         # Z回転
         Angle = self.Rotate.z
-        while 1:
-            if Angle < 0:
-                Angle = Angle + 360
-            else:break
-        Angle2,Angle3,Angle4 = 0,0,0
-        if Angle / 90 > 1:
-            A = Angle%360
-            if A <= 90:
-                Angle = A
-            elif A <= 180:
-                Angle = 90
-                Angle2 = A-90
-            elif A <= 270:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = A-180
-            elif A <= 360:
-                Angle = 90
-                Angle2 = 90
-                Angle3 = 90
-                Angle4 = A-270
+        # 角度を90度以下に分割
+        Angle,Angle2,Angle3,Angle4 = Angle90(Angle)
         Angles = [Angle,Angle2,Angle3,Angle4]
         for i in Angles:
+            if i == 0:
+                continue
+            # 角度が0じゃなかったら各頂点を回転
             RayVector = RZ(RayVector,i)
 
         return RayVector

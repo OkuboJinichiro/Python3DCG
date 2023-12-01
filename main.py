@@ -2,6 +2,7 @@ import tkinter as tk # GUI作成用
 import time # 時間計測用
 from MyPackage import WindowMaker,StartWindow,Rendering,Vector3,Camera,OBJ,GUIMaker,GetOption
 
+# レンダリング中かを記録するbool
 RenderingNow = False
 
 def main():
@@ -17,12 +18,15 @@ def main():
         pass # 入力されたサイズに対するエラー
     def GetButton():
         try:
+            # 入力を受け取る
             inx = int(WinX_Entry.get()) * 100
             iny = (int(WinY_Entry.get()) * 100)
+            # サイズをチェック
             if inx < 1000:
                 raise MyException("幅が小さすぎます")
             elif iny < 600:
                 raise MyException("高さが小さすぎます")
+            # 問題なければウィンドウサイズを設定
             WS.x = inx
             WS.y = iny - 200
             WindowOptionRoot.destroy()
@@ -40,11 +44,16 @@ def main():
 # ===== レンダリングボタンの処理 =====
     def RenderingButtonDown(event = "NULL"):
         global RenderingNow
+        # レンダリング中だったら何もしない
         if not RenderingNow:
+            # boolをレンダリング中に
             RenderingNow = True
+            # ボタンをレンダリング中の物へ
             text["text"] = "※レンダリング中..."
             RenderingButton["state"] = tk.DISABLED
             RenderingButton["bg"] = "#505050"
+            # レンダリング処理を呼び出し
+            # GUIの更新を入れるために時間差を入れている
             root.after(50,Render)
     def Render():
         # 入力された数字を受け取る
@@ -56,14 +65,12 @@ def main():
             return
 
         # オブジェクトを回転
-        if RX!=0:MainOBJ.RotateX(Angle=RX)
-        if RY!=0:MainOBJ.RotateY(Angle=RY)
-        if RZ!=0:MainOBJ.RotateZ(Angle=RZ)
+        MainOBJ.RotateALL(RX,RY,RZ)
 
         # レンダリング
-        start = time.time()
-        Rendering(canvas,WS,MCam,MainOBJ,ILL = ILL)
-        RenTime = time.time() - start
+        start = time.time() # 時間記録用
+        Rendering(canvas,WS,MCam,MainOBJ,ILL = ILL) # レンダリングの実行
+        RenTime = time.time() - start # 時間記録用
         text["text"] = "※レンダリング時間:" + str(round(RenTime,2)) + "秒"
 
         # 回転の入力ボックスをクリア
@@ -76,12 +83,17 @@ def main():
 
         # ボタンを復活
         root.after(round(RenTime*700),RenderingButtonCT)
+
     def RenderingButtonCT():
+        # 時間差をつけてレンダリングボタンを復活させる
         global RenderingNow
         RenderingButton["state"] = tk.NORMAL
         RenderingButton["bg"] = "red"
         RenderingNow = False
+    
+    # ボタンに処理を追加
     RenderingButton["command"] = RenderingButtonDown
+    # Enterキーでもレンダリング可能に
     root.bind("<Return>",func=RenderingButtonDown)
 
     root.mainloop()
