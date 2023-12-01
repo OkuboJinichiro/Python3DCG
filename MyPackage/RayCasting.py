@@ -1,7 +1,4 @@
-try:
-    from .Math import *
-except:
-    from Math import *
+from .Math import *
 
 def RayCast(Cam,face,RayX,RayY):
     # face ([0] = z [1] = y [2] = x [3] = 法線 [4] = 色)
